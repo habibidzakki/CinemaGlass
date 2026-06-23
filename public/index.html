@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CineGlass - Premium Cinema Ticketing</title>
+    <meta name="description" content="Pesan tiket bioskop online dengan mudah dan cepat. Nikmati pengalaman premium bioskop CineGlass dengan UI estetik iOS 26 Glassmorphism.">
+    <!-- Google Fonts: Plus Jakarta Sans / Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Main Style sheet -->
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <!-- Background Animated Gradients & Blur Orbs -->
+    <div class="bg-gradient-wrapper">
+        <div class="blur-orb orb-red"></div>
+        <div class="blur-orb orb-blue"></div>
+        <div class="blur-orb orb-purple"></div>
+    </div>
+
+    <!-- MAIN APP CONTAINER -->
+    <div id="app-container" class="app-container">
+        
+        <!-- FLOATING TOP NAVBAR -->
+        <header id="main-header" class="main-header floating-glass hide">
+            <div class="header-content">
+                <div class="logo-area" id="btn-logo">
+                    <span class="logo-icon"><i class="fa-solid fa-clapperboard"></i></span>
+                    <span class="logo-text">CINE<span>GLASS</span></span>
+                </div>
+                <div class="user-profile-area">
+                    <span id="user-display-name" class="user-name">Guest</span>
+                    <span id="user-display-role" class="user-badge">Customer</span>
+                    <button id="btn-logout" class="icon-btn-danger" title="Keluar"><i class="fa-solid fa-power-off"></i></button>
+                </div>
+            </div>
+        </header>
+
+        <!-- APP VIEWS HOLDER -->
+        <main id="view-holder" class="view-holder">
+            
+            <!-- ================= VIEW: LOGIN ================= -->
+            <section id="view-login" class="view-section active">
+                <div class="auth-card-wrapper">
+                    <div class="auth-card floating-glass">
+                        <div class="auth-logo">
+                            <span class="logo-icon-large"><i class="fa-solid fa-ticket-simple"></i></span>
+                            <h2>Selamat Datang di <span>CINEGLASS</span></h2>
+                            <p>Silakan masuk ke akun Anda untuk mulai memesan tiket</p>
+                        </div>
+                        <form id="form-login" class="auth-form">
+                            <div class="form-group">
+                                <label for="login-username"><i class="fa-solid fa-user"></i> Username</label>
+                                <input type="text" id="login-username" placeholder="Masukkan username Anda" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="login-password"><i class="fa-solid fa-lock"></i> Password</label>
+                                <div class="password-input-wrapper">
+                                    <input type="password" id="login-password" placeholder="Masukkan password Anda" required>
+                                    <button type="button" class="btn-toggle-password"><i class="fa-solid fa-eye"></i></button>
+                                </div>
+                            </div>
+                            <div class="form-error" id="login-error"></div>
+                            <button type="submit" class="btn-primary-ios">Masuk <span class="gloss-layer"></span></button>
+                        </form>
+                        <div class="auth-footer">
+                            Belum punya akun? <a href="#" id="link-to-register">Daftar Sekarang</a>
+                        </div>
+                        <div class="demo-info">
+                            <p><strong>Akun Demo Cepat:</strong></p>
+                            <p>Admin: <code class="selectable">admin</code> / <code class="selectable">admin123</code></p>
+                            <p>Customer: <code class="selectable">customer</code> / <code class="selectable">customer123</code></p>
+                            <hr class="demo-separator">
+                            <p><a href="/api/redirect-google" target="_blank" class="redirect-link"><i class="fa-solid fa-arrow-up-right-from-square"></i> Test Redirect Ke Google</a></p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ================= VIEW: REGISTER ================= -->
+            <section id="view-register" class="view-section hide">
+                <div class="auth-card-wrapper">
+                    <div class="auth-card floating-glass">
+                        <div class="auth-logo">
+                            <span class="logo-icon-large"><i class="fa-solid fa-user-plus"></i></span>
+                            <h2>Daftar Akun Baru</h2>
+                            <p>Buat akun CineGlass Anda untuk memesan tiket nonton</p>
+                        </div>
+                        <form id="form-register" class="auth-form">
+                            <div class="form-group">
+                                <label for="reg-fullname"><i class="fa-solid fa-address-card"></i> Nama Lengkap</label>
+                                <input type="text" id="reg-fullname" placeholder="Masukkan nama lengkap Anda" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="reg-email"><i class="fa-solid fa-envelope"></i> Email</label>
+                                <input type="email" id="reg-email" placeholder="Masukkan email Anda" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="reg-phone"><i class="fa-solid fa-phone"></i> Nomor HP</label>
+                                <input type="tel" id="reg-phone" placeholder="Contoh: 08123456789">
+                            </div>
+                            <div class="form-group">
+                                <label for="reg-username"><i class="fa-solid fa-user"></i> Username</label>
+                                <input type="text" id="reg-username" placeholder="Pilih username unik" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="reg-password"><i class="fa-solid fa-lock"></i> Password</label>
+                                <div class="password-input-wrapper">
+                                    <input type="password" id="reg-password" placeholder="Masukkan password minimal 6 karakter" required minlength="6">
+                                    <button type="button" class="btn-toggle-password"><i class="fa-solid fa-eye"></i></button>
+                                </div>
+                            </div>
+                            <div class="form-error" id="reg-error"></div>
+                            <button type="submit" class="btn-primary-ios">Daftar Sekarang <span class="gloss-layer"></span></button>
+                        </form>
+                        <div class="auth-footer">
+                            Sudah punya akun? <a href="#" id="link-to-login">Kembali ke Login</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ================= VIEW: CUSTOMER HOME ================= -->
+            <section id="view-customer-home" class="view-section hide">
+                <div class="customer-home-wrapper">
+                    <!-- Hero Section -->
+                    <div class="hero-banner floating-glass">
+                        <div class="hero-text">
+                            <span class="hero-badge"><i class="fa-solid fa-star"></i> Pilihan Terbaik Minggu Ini</span>
+                            <h1>Spider-Man: No Way Home</h1>
+                            <p>Ketika identitas Spider-Man terungkap secara global, Peter Parker meminta bantuan dari Doctor Strange, memicu konsekuesi multiverse yang belum pernah terjadi sebelumnya.</p>
+                            <div class="hero-actions">
+                                <button class="btn-primary-ios btn-quick-booking" data-film-id="3">Beli Tiket Sekarang <span class="gloss-layer"></span></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Filter & Search Panel -->
+                    <div class="filter-panel floating-glass">
+                        <div class="search-box">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                            <input type="text" id="film-search" placeholder="Cari film, genre...">
+                        </div>
+                        <div class="genre-filters">
+                            <button class="filter-tag active" data-genre="all">Semua</button>
+                            <button class="filter-tag" data-genre="action">Action</button>
+                            <button class="filter-tag" data-genre="sci-fi">Sci-Fi</button>
+                            <button class="filter-tag" data-genre="drama">Drama</button>
+                            <button class="filter-tag" data-genre="adventure">Adventure</button>
+                        </div>
+                    </div>
+
+                    <!-- Movie List Section -->
+                    <div class="section-title">
+                        <h2>Sedang Tayang di <span>CINEGLASS</span></h2>
+                        <p>Pilih film favorit Anda untuk melihat jadwal dan memesan kursi</p>
+                    </div>
+
+                    <div id="movie-grid" class="movie-grid">
+                        <!-- Movie Card Placeholder (Rendered dynamically) -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- ================= VIEW: MOVIE DETAIL ================= -->
+            <section id="view-movie-detail" class="view-section hide">
+                <div class="movie-detail-wrapper">
+                    <button class="btn-back-floating floating-glass" id="btn-back-to-home"><i class="fa-solid fa-arrow-left"></i> Kembali</button>
+                    
+                    <div class="movie-detail-container floating-glass">
+                        <div class="detail-poster">
+                            <img id="detail-poster-img" src="" alt="Film Poster">
+                        </div>
+                        <div class="detail-info">
+                            <span id="detail-rating" class="rating-badge">R13+</span>
+                            <h1 id="detail-title">Judul Film</h1>
+                            <p id="detail-genre" class="detail-genre-text"><i class="fa-solid fa-film"></i> Action, Sci-Fi</p>
+                            <p id="detail-duration" class="detail-duration-text"><i class="fa-solid fa-clock"></i> 150 menit</p>
+                            <p id="detail-release" class="detail-release-text"><i class="fa-solid fa-calendar"></i> Rilis: 2024-03-01</p>
+                            
+                            <hr class="detail-divider">
+                            
+                            <h3>Sinopsis</h3>
+                            <p id="detail-description" class="detail-description-text">Sinopsis film di sini...</p>
+                        </div>
+                    </div>
+
+                    <!-- SHOWTIME SELECTION -->
+                    <div class="section-title margin-top-large">
+                        <h2>Jadwal Tayang & Studio</h2>
+                        <p>Pilih studio dan jam tayang yang sesuai untuk mulai memesan tiket</p>
+                    </div>
+
+                    <div id="showtime-list" class="showtime-list-grid">
+                        <!-- Showtime Cards (Rendered dynamically) -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- ================= VIEW: SEAT SELECTION ================= -->
+            <section id="view-seat-selection" class="view-section hide">
+                <div class="seat-selection-wrapper">
+                    <button class="btn-back-floating floating-glass" id="btn-back-to-detail"><i class="fa-solid fa-arrow-left"></i> Kembali</button>
+                    
+                    <div class="selection-grid-layout">
+                        <!-- SEAT MAP CONTAINER (iOS Capsule Card) -->
+                        <div class="seat-map-card floating-glass">
+                            <div class="studio-info-header">
+                                <h2 id="seat-studio-name">Studio 1 Premier</h2>
+                                <p id="seat-film-title">Film Title</p>
+                                <p id="seat-showtime-time"><i class="fa-regular fa-clock"></i> Jam Tayang: 14:00</p>
+                            </div>
+
+                            <!-- SCREEN REPRESENTATION -->
+                            <div class="screen-container">
+                                <div class="screen-glow"></div>
+                                <div class="screen-text">LAYAR BIOSKOP</div>
+                            </div>
+
+                            <!-- Dynamic Seating Grid -->
+                            <div id="seats-grid" class="seats-grid">
+                                <!-- Generated Dynamically -->
+                            </div>
+
+                            <!-- Legend -->
+                            <div class="seat-legend">
+                                <div class="legend-item">
+                                    <span class="legend-box available"></span>
+                                    <span>Tersedia</span>
+                                </div>
+                                <div class="legend-item">
+                                    <span class="legend-box selected"></span>
+                                    <span>Pilihanmu</span>
+                                </div>
+                                <div class="legend-item">
+                                    <span class="legend-box occupied"></span>
+                                    <span>Tidak Tersedia</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- BOOKING SUMMARY SIDEBAR -->
+                        <div class="booking-summary-card floating-glass">
+                            <h2>Ringkasan Order</h2>
+                            <hr class="summary-divider">
+
+                            <div class="summary-details">
+                                <div class="summary-row">
+                                    <span class="label">Film</span>
+                                    <span class="value" id="summary-film-title">-</span>
+                                </div>
+                                <div class="summary-row">
+                                    <span class="label">Studio</span>
+                                    <span class="value" id="summary-studio-name">-</span>
+                                </div>
+                                <div class="summary-row">
+                                    <span class="label">Waktu</span>
+                                    <span class="value" id="summary-time">-</span>
+                                </div>
+                                <div class="summary-row">
+                                    <span class="label">Harga Tiket</span>
+                                    <span class="value" id="summary-ticket-price">Rp0</span>
+                                </div>
+                                <div class="summary-row">
+                                    <span class="label">Kursi Terpilih</span>
+                                    <span class="value seats-badge-list" id="summary-selected-seats">-</span>
+                                </div>
+                            </div>
+
+                            <hr class="summary-divider">
+
+                            <div class="total-price-box">
+                                <span>TOTAL PEMBAYARAN</span>
+                                <span id="summary-total-price" class="total-price">Rp0</span>
+                            </div>
+
+                            <button id="btn-confirm-booking" class="btn-primary-ios w-100 disabled" disabled>
+                                Beli Tiket <span class="gloss-layer"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ================= VIEW: CUSTOMER BOOKINGS (HISTORY) ================= -->
+            <section id="view-customer-bookings" class="view-section hide">
+                <div class="bookings-history-wrapper">
+                    <div class="section-title">
+                        <h2>Riwayat Transaksi</h2>
+                        <p>Lihat e-ticket dan kelola transaksi pemesanan tiket bioskop Anda</p>
+                    </div>
+
+                    <div id="booking-history-list" class="booking-history-list">
+                        <!-- Rendered dynamically -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- ================= VIEW: TICKET DETAIL (DIGITAL E-TICKET) ================= -->
+            <section id="view-ticket-detail" class="view-section hide">
+                <div class="ticket-detail-wrapper">
+                    <button class="btn-back-floating floating-glass no-print" id="btn-back-to-bookings"><i class="fa-solid fa-arrow-left"></i> Kembali</button>
+                    
+                    <!-- Premium Movie Ticket -->
+                    <div class="ticket-card-container">
+                        <div class="ticket-card floating-glass">
+                            <div class="ticket-header">
+                                <div class="ticket-logo">
+                                    <i class="fa-solid fa-clapperboard"></i> CINEGLASS
+                                </div>
+                                <div class="ticket-status-badge booked" id="ticket-status-val">BOARDING PASS</div>
+                            </div>
+                            
+                            <div class="ticket-body">
+                                <div class="ticket-info-main">
+                                    <div class="ticket-poster-side">
+                                        <img id="ticket-poster-img" src="" alt="Film Poster">
+                                    </div>
+                                    <div class="ticket-text-side">
+                                        <h1 id="ticket-title-val">THE BATMAN</h1>
+                                        <div class="ticket-meta-grid">
+                                            <div class="meta-item">
+                                                <span class="meta-label">TANGGAL & JAM</span>
+                                                <span class="meta-value" id="ticket-time-val">Senin, 24 Juni 2026 - 15:00</span>
+                                            </div>
+                                            <div class="meta-item">
+                                                <span class="meta-label">STUDIO</span>
+                                                <span class="meta-value" id="ticket-studio-val">Studio 1 Premier</span>
+                                            </div>
+                                            <div class="meta-item">
+                                                <span class="meta-label">KURSI</span>
+                                                <span class="meta-value seats-highlight" id="ticket-seats-val">A1, A2</span>
+                                            </div>
+                                            <div class="meta-item">
+                                                <span class="meta-label">HARGA TIKET</span>
+                                                <span class="meta-value" id="ticket-price-val">Rp45,000 / kursi</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="ticket-divider">
+                                    <div class="notch left"></div>
+                                    <div class="dashed-line"></div>
+                                    <div class="notch right"></div>
+                                </div>
+
+                                <div class="ticket-footer-barcode">
+                                    <div class="barcode-wrapper">
+                                        <div class="barcode-lines"></div>
+                                        <div class="barcode-number" id="ticket-id-val">ORDER ID: CG-8273618</div>
+                                    </div>
+                                    <div class="ticket-customer-info">
+                                        <div class="cust-label">NAMA PEMESAN</div>
+                                        <div class="cust-name" id="ticket-customer-val">John Doe</div>
+                                        <div class="ticket-info-note">Harap tunjukkan e-ticket digital ini ke petugas bioskop untuk discan.</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="ticket-action-buttons no-print">
+                        <button class="btn-primary-ios btn-print-ticket" onclick="window.print()">
+                            <i class="fa-solid fa-print"></i> Cetak / Simpan PDF <span class="gloss-layer"></span>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ================= VIEW: CUSTOMER PROFILE ================= -->
+            <section id="view-customer-profile" class="view-section hide">
+                <div class="profile-wrapper">
+                    <div class="profile-card floating-glass">
+                        <div class="profile-avatar">
+                            <i class="fa-solid fa-user-gear"></i>
+                        </div>
+                        <h2>Edit Data Diri</h2>
+                        <p>Perbarui informasi akun dan password Anda di sini</p>
+
+                        <form id="form-edit-profile" class="profile-form">
+                            <div class="form-group">
+                                <label for="profile-username"><i class="fa-solid fa-user-lock"></i> Username (Tidak dapat diubah)</label>
+                                <input type="text" id="profile-username" readonly disabled>
+                            </div>
+                            <div class="form-group">
+                                <label for="profile-fullname"><i class="fa-solid fa-address-card"></i> Nama Lengkap</label>
+                                <input type="text" id="profile-fullname" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="profile-email"><i class="fa-solid fa-envelope"></i> Email</label>
+                                <input type="email" id="profile-email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="profile-phone"><i class="fa-solid fa-phone"></i> Nomor HP</label>
+                                <input type="tel" id="profile-phone">
+                            </div>
+                            <div class="form-group">
+                                <label for="profile-password"><i class="fa-solid fa-key"></i> Ubah Password (Kosongkan jika tidak diubah)</label>
+                                <div class="password-input-wrapper">
+                                    <input type="password" id="profile-password" placeholder="Masukkan password baru" minlength="6">
+                                    <button type="button" class="btn-toggle-password"><i class="fa-solid fa-eye"></i></button>
+                                </div>
+                            </div>
+                            
+                            <div class="form-error" id="profile-error"></div>
+                            <div class="form-success" id="profile-success"></div>
+
+                            <button type="submit" class="btn-primary-ios">Simpan Perubahan <span class="gloss-layer"></span></button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ================= VIEW: ADMIN DASHBOARD (STATS) ================= -->
+            <section id="view-admin-dashboard" class="view-section hide">
+                <div class="admin-dashboard-wrapper">
+                    <div class="section-title">
+                        <h2>Panel Admin & Ringkasan Statistik</h2>
+                        <p>Kelola film, studio, jadwal tayang, dan lihat analisis transaksi terkini</p>
+                    </div>
+
+                    <!-- Statistics Cards Grid -->
+                    <div class="stats-grid">
+                        <div class="stat-card floating-glass">
+                            <div class="stat-icon"><i class="fa-solid fa-film text-neon-blue"></i></div>
+                            <div class="stat-data">
+                                <span class="stat-title">Total Film</span>
+                                <h3 id="stat-films" class="stat-value">-</h3>
+                            </div>
+                        </div>
+                        <div class="stat-card floating-glass">
+                            <div class="stat-icon"><i class="fa-solid fa-calendar-days text-neon-purple"></i></div>
+                            <div class="stat-data">
+                                <span class="stat-title">Jadwal Tayang</span>
+                                <h3 id="stat-showtimes" class="stat-value">-</h3>
+                            </div>
+                        </div>
+                        <div class="stat-card floating-glass">
+                            <div class="stat-icon"><i class="fa-solid fa-users text-neon-orange"></i></div>
+                            <div class="stat-data">
+                                <span class="stat-title">Total Pelanggan</span>
+                                <h3 id="stat-customers" class="stat-value">-</h3>
+                            </div>
+                        </div>
+                        <div class="stat-card floating-glass">
+                            <div class="stat-icon"><i class="fa-solid fa-ticket text-neon-green"></i></div>
+                            <div class="stat-data">
+                                <span class="stat-title">Tiket Terjual</span>
+                                <h3 id="stat-tickets" class="stat-value">-</h3>
+                            </div>
+                        </div>
+                        <div class="stat-card floating-glass card-span-2">
+                            <div class="stat-icon"><i class="fa-solid fa-wallet text-neon-gold"></i></div>
+                            <div class="stat-data">
+                                <span class="stat-title">Total Pendapatan</span>
+                                <h3 id="stat-revenue" class="stat-value">Rp0</h3>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Operations Menu -->
+                    <div class="quick-admin-actions floating-glass margin-top-large">
+                        <h3>Pintasan Menu Pengelolaan</h3>
+                        <div class="admin-btn-group">
+                            <button class="btn-secondary-ios btn-tab-trigger" data-target="admin-films"><i class="fa-solid fa-film"></i> Kelola Film</button>
+                            <button class="btn-secondary-ios btn-tab-trigger" data-target="admin-showtimes"><i class="fa-solid fa-clock"></i> Kelola Jadwal</button>
+                            <button class="btn-secondary-ios btn-tab-trigger" data-target="admin-studios"><i class="fa-solid fa-expand"></i> Kelola Studio</button>
+                            <button class="btn-secondary-ios btn-tab-trigger" data-target="admin-bookings"><i class="fa-solid fa-receipt"></i> Kelola Transaksi</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ================= VIEW: ADMIN FILMS (CRUD) ================= -->
+            <section id="view-admin-films" class="view-section hide">
+                <div class="admin-crud-wrapper">
+                    <div class="crud-header">
+                        <h2>Kelola Daftar Film</h2>
+                        <button id="btn-add-film" class="btn-primary-ios"><i class="fa-solid fa-plus"></i> Tambah Film <span class="gloss-layer"></span></button>
+                    </div>
+
+                    <div class="table-container floating-glass">
+                        <table class="crud-table" id="table-films">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Poster</th>
+                                    <th>Judul</th>
+                                    <th>Genre</th>
+                                    <th>Durasi</th>
+                                    <th>Rating</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Rendered dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ================= VIEW: ADMIN STUDIOS (CRUD) ================= -->
+            <section id="view-admin-studios" class="view-section hide">
+                <div class="admin-crud-wrapper">
+                    <div class="crud-header">
+                        <h2>Kelola Daftar Studio</h2>
+                        <button id="btn-add-studio" class="btn-primary-ios"><i class="fa-solid fa-plus"></i> Tambah Studio <span class="gloss-layer"></span></button>
+                    </div>
+
+                    <div class="table-container floating-glass">
+                        <table class="crud-table" id="table-studios">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nama Studio</th>
+                                    <th>Baris Kursi</th>
+                                    <th>Kolom Kursi</th>
+                                    <th>Kapasitas Total</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Rendered dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ================= VIEW: ADMIN SHOWTIMES (CRUD) ================= -->
+            <section id="view-admin-showtimes" class="view-section hide">
+                <div class="admin-crud-wrapper">
+                    <div class="crud-header">
+                        <h2>Kelola Jadwal Tayang</h2>
+                        <button id="btn-add-showtime" class="btn-primary-ios"><i class="fa-solid fa-plus"></i> Tambah Jadwal <span class="gloss-layer"></span></button>
+                    </div>
+
+                    <div class="table-container floating-glass">
+                        <table class="crud-table" id="table-showtimes">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Film</th>
+                                    <th>Studio</th>
+                                    <th>Waktu Tayang</th>
+                                    <th>Harga Tiket</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Rendered dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ================= VIEW: ADMIN BOOKINGS (TRANSACTIONS) ================= -->
+            <section id="view-admin-bookings" class="view-section hide">
+                <div class="admin-crud-wrapper">
+                    <div class="crud-header">
+                        <h2>Kelola Pemesanan Tiket Pelanggan</h2>
+                    </div>
+
+                    <div class="table-container floating-glass">
+                        <table class="crud-table" id="table-admin-bookings">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nama Pelanggan</th>
+                                    <th>Film & Studio</th>
+                                    <th>Tanggal Pemesanan</th>
+                                    <th>Kursi</th>
+                                    <th>Status</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Rendered dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- FLOATING BOTTOM NAVIGATION BAR (iOS Capsule Menu) -->
+        <nav id="main-nav-bar" class="main-nav-bar floating-glass hide">
+            <!-- Dynamic elements will be handled in JS based on role -->
+            <div id="nav-items-container" class="nav-items-wrapper">
+                <!-- Customer Tabs -->
+                <!-- Admin Tabs -->
+            </div>
+        </nav>
+    </div>
+
+    <!-- ================= CUSTOM FLOATING MODAL FORM: FILM ================= -->
+    <div id="modal-film" class="modal-wrapper hide">
+        <div class="modal-card floating-glass">
+            <div class="modal-header">
+                <h2 id="modal-film-title">Tambah Film Baru</h2>
+                <button class="btn-close-modal"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <form id="form-film">
+                <input type="hidden" id="form-film-id">
+                <div class="form-group">
+                    <label for="form-film-name">Judul Film</label>
+                    <input type="text" id="form-film-name" required placeholder="Contoh: Batman Begins">
+                </div>
+                <div class="form-group">
+                    <label for="form-film-genre">Genre</label>
+                    <input type="text" id="form-film-genre" required placeholder="Contoh: Action, Thriller">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="form-film-duration">Durasi (Menit)</label>
+                        <input type="number" id="form-film-duration" required min="1" placeholder="Contoh: 140">
+                    </div>
+                    <div class="form-group">
+                        <label for="form-film-rating">Rating</label>
+                        <select id="form-film-rating">
+                            <option value="SU">SU (Semua Umur)</option>
+                            <option value="R13+">R13+ (Remaja)</option>
+                            <option value="D17+">D17+ (Dewasa)</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="form-film-poster">Poster URL</label>
+                    <input type="url" id="form-film-poster" placeholder="URL Gambar Poster">
+                </div>
+                <div class="form-group">
+                    <label for="form-film-release">Tanggal Rilis</label>
+                    <input type="date" id="form-film-release">
+                </div>
+                <div class="form-group">
+                    <label for="form-film-desc">Sinopsis / Deskripsi</label>
+                    <textarea id="form-film-desc" rows="3" placeholder="Sinopsis singkat mengenai film..."></textarea>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn-secondary-ios btn-close-modal">Batal</button>
+                    <button type="submit" class="btn-primary-ios">Simpan <span class="gloss-layer"></span></button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ================= CUSTOM FLOATING MODAL FORM: STUDIO ================= -->
+    <div id="modal-studio" class="modal-wrapper hide">
+        <div class="modal-card floating-glass">
+            <div class="modal-header">
+                <h2 id="modal-studio-title">Tambah Studio Baru</h2>
+                <button class="btn-close-modal"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <form id="form-studio">
+                <input type="hidden" id="form-studio-id">
+                <div class="form-group">
+                    <label for="form-studio-name">Nama Studio</label>
+                    <input type="text" id="form-studio-name" required placeholder="Contoh: Studio 4 VIP">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="form-studio-rows">Jumlah Baris (Maks 15)</label>
+                        <input type="number" id="form-studio-rows" required min="1" max="15" value="8" placeholder="Contoh: 8">
+                    </div>
+                    <div class="form-group">
+                        <label for="form-studio-cols">Jumlah Kolom (Maks 20)</label>
+                        <input type="number" id="form-studio-cols" required min="1" max="20" value="10" placeholder="Contoh: 10">
+                    </div>
+                </div>
+                <p class="form-info-tip"><i class="fa-solid fa-circle-info"></i> Kapasitas total dihitung dari baris x kolom. Kursi akan diberi label A1 hingga O20.</p>
+                <div class="modal-actions">
+                    <button type="button" class="btn-secondary-ios btn-close-modal">Batal</button>
+                    <button type="submit" class="btn-primary-ios">Simpan <span class="gloss-layer"></span></button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ================= CUSTOM FLOATING MODAL FORM: SHOWTIME ================= -->
+    <div id="modal-showtime" class="modal-wrapper hide">
+        <div class="modal-card floating-glass">
+            <div class="modal-header">
+                <h2 id="modal-showtime-title">Tambah Jadwal Tayang</h2>
+                <button class="btn-close-modal"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <form id="form-showtime">
+                <input type="hidden" id="form-showtime-id">
+                <div class="form-group">
+                    <label for="form-showtime-film">Pilih Film</label>
+                    <select id="form-showtime-film" required>
+                        <!-- Loaded dynamically -->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="form-showtime-studio">Pilih Studio</label>
+                    <select id="form-showtime-studio" required>
+                        <!-- Loaded dynamically -->
+                    </select>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="form-showtime-time">Waktu Tayang</label>
+                        <input type="datetime-local" id="form-showtime-time" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="form-showtime-price">Harga Tiket (Rp)</label>
+                        <input type="number" id="form-showtime-price" required min="0" step="500" value="45000" placeholder="Contoh: 45000">
+                    </div>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn-secondary-ios btn-close-modal">Batal</button>
+                    <button type="submit" class="btn-primary-ios">Simpan <span class="gloss-layer"></span></button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ================= CUSTOM CONFIRMATION MODAL (NO BROWSER DIALOG) ================= -->
+    <div id="modal-confirm" class="modal-wrapper hide">
+        <div class="modal-card modal-confirm-card floating-glass">
+            <div class="modal-confirm-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
+            <h2 id="confirm-title">Konfirmasi Aksi</h2>
+            <p id="confirm-message">Apakah Anda yakin ingin melakukan aksi ini?</p>
+            <div class="modal-actions confirm-actions">
+                <button id="btn-confirm-cancel" class="btn-secondary-ios">Batal</button>
+                <button id="btn-confirm-ok" class="btn-danger-ios">Ya, Lanjutkan</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= CUSTOM FLOATING TOAST NOTIFICATION ================= -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <script src="/js/app.js"></script>
+</body>
+</html>
